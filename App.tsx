@@ -12,16 +12,37 @@ import ForumScreen from "./components/ForumScreen";
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const TOKEN =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtpa2lAZW1haWwuY29tIiwiaWQiOjIsImlhdCI6MTY3NzAyOTM0OSwiZXhwIjoxNjc5NjIxMzQ5fQ.mcdeoas5v23xAe5oT1lbtxriICsQVGLDyq6I3Aa5NJo";
+
   useEffect(() => {
     const hideSplashScreen = async () => {
       await Splash.hideAsync();
       setLoading(false);
     };
-
     setTimeout(hideSplashScreen, 3000);
   }, []);
-  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  useEffect(() => {
+    fetch("http://3.26.31.47:3000/api/posts", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        // Authorization: "Bearer " + TOKEN,
+        Authorization: TOKEN,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setPosts(data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+  console.log(posts);
   if (!fontsLoaded) {
     return (
       <AppLoading
@@ -43,7 +64,11 @@ const App = () => {
               component={HomeScreen}
               options={{ headerShown: false }}
             />
-            <Stack.Screen name="ForumScreen" component={ForumScreen} />
+            <Stack.Screen
+              name="ForumScreen"
+              component={ForumScreen}
+              options={{ headerShown: false }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       )}

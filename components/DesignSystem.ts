@@ -1,11 +1,6 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet } from "react-native";
 import * as Font from "expo-font";
-import {
-  Button,
-  DefaultTheme,
-  MD3LightTheme,
-  Provider as PaperProvider,
-} from "react-native-paper";
+import { DefaultTheme } from "react-native-paper";
 
 export const styles = StyleSheet.create({
   container: {
@@ -18,6 +13,7 @@ export const styles = StyleSheet.create({
 
 export const loadFonts = async () => {
   await Font.loadAsync({
+    "syne-bold": require("../assets/fonts/Syne-Bold.ttf"),
     "syne-semibold": require("../assets/fonts/Syne-SemiBold.ttf"),
     "syne-regular": require("../assets/fonts/Syne-Regular.ttf"),
   });
@@ -34,16 +30,19 @@ export const theme = {
       fontFamily: "syne-semibold",
       fontWeight: "semibold",
     },
+    bold: {
+      fontFamily: "syne-bold",
+      fontWeight: "bold",
+    },
   },
   colors: {
     ...DefaultTheme.colors,
-    white: "#F8F8F8",
-    charcoal: "#383939",
     offWhite: "#FFFFFF",
-    lightGrey: "#E8E8E8",
+    darkerGrey: "#0000005C",
     black: "#000000",
-    darkGrey: "#707070",
+    charcoal: "#383939",
+    lightGrey: "#E8E8E8",
+    lighterGrey: "#EFEFEF",
     blue: "#6537FF",
-    error: "#B00020",
   },
 };
