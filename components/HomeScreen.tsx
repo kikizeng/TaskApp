@@ -3,6 +3,7 @@ import { View, Image, Text } from "react-native";
 import { Button, Provider as PaperProvider } from "react-native-paper";
 import { theme } from "./DesignSystem";
 import { StatusBar } from "expo-status-bar";
+import LandingSvg from "../assets/LandingSvg";
 
 type HomeScreenProps = {
   navigation: any;
@@ -13,10 +14,22 @@ const HomeScreen: React.FC<HomeScreenProps> = (props) => {
   return (
     <PaperProvider theme={theme}>
       <View>
-        <View style={{ width: 414, height: undefined }}>
+        <View style={{ width: 414, height: undefined, position: "relative" }}>
           <Image
             source={require("../assets/mask-group.png")}
-            style={{ width: "100%", height: undefined, aspectRatio: 1 }}
+            style={{
+              width: "100%",
+              height: undefined,
+              aspectRatio: 1,
+            }}
+          />
+          <LandingSvg
+            style={{
+              transform: [{ rotate: "45deg" }],
+              position: "absolute",
+              bottom: 80,
+              left: 90,
+            }}
           />
         </View>
         <View

@@ -4,6 +4,7 @@ import { Image } from "react-native";
 import * as Splash from "expo-splash-screen";
 import { Provider as PaperProvider } from "react-native-paper";
 import { theme } from "./DesignSystem";
+import SplashSvg from "../assets/SplashSvg";
 
 type SplashScreenProps = {};
 
@@ -19,7 +20,8 @@ const SplashScreen: React.FC<SplashScreenProps> = () => {
           justifyContent: "center",
         }}
       >
-        <Text>Loading</Text>
+        <SplashSvg />
+        {/* <Text>Loading</Text> */}
       </View>
     </PaperProvider>
   );
