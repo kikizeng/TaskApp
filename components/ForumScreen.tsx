@@ -3,11 +3,12 @@ import { Text } from "react-native";
 
 type ForumScreenProps = {
   navigation: any;
-  route: string;
+  // route: string;
 };
 
-const ForumScreen: React.FC<ForumScreenProps> = ({ navigation, route }) => {
-  return <Text>This is {route}'s profile</Text>;
+const ForumScreen: React.FC<ForumScreenProps> = (props) => {
+  const { navigation } = props;
+  return <Text>Forum</Text>;
 };
 
 export default ForumScreen;
