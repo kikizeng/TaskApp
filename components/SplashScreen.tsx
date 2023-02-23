@@ -21,7 +21,6 @@ const SplashScreen: React.FC<SplashScreenProps> = () => {
         }}
       >
         <SplashSvg />
-        {/* <Text>Loading</Text> */}
       </View>
     </PaperProvider>
   );

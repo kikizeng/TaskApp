@@ -4,12 +4,25 @@ import { StatusBar } from "expo-status-bar";
 import { theme } from "./DesignSystem";
 import { MaterialIcons, Feather } from "@expo/vector-icons";
 import { Button } from "react-native-paper";
-export type ForumScreenProps = {
-  navigation: any;
-  // tags: string[];
-};
 
-const dummyData = [
+type DummyDataProps = {
+  id: number;
+  title: string;
+  content: string;
+  createdAt: string;
+  tags: string[];
+  user: {
+    id: number;
+    email: string;
+    firstName: string;
+    lastName: string;
+    telephone: string;
+  };
+  likes: number;
+  comments: number;
+}[];
+
+const dummyData: DummyDataProps = [
   {
     id: 1,
     title: "My first post",
@@ -28,8 +41,8 @@ const dummyData = [
   },
 ];
 
-const ForumScreen: React.FC<ForumScreenProps> = (props) => {
-  const { navigation } = props;
+const ForumScreen: React.FC = () => {
+  // const { navigation } = props;
   return (
     <View>
       <View
@@ -125,101 +138,103 @@ const ForumScreen: React.FC<ForumScreenProps> = (props) => {
       <View
         style={{ borderBottomWidth: 5, borderColor: theme.colors.lightGrey }}
       />
-      {dummyData.map((post, i) => (
-        <View
-          style={{
-            paddingVertical: 25,
-          }}
-        >
+      {dummyData &&
+        dummyData.map((post, i) => (
           <View
+            key={`post-${i}`}
             style={{
-              paddingHorizontal: 15,
+              paddingVertical: 25,
             }}
           >
             <View
               style={{
-                flexDirection: "row",
-                alignItems: "center",
+                paddingHorizontal: 15,
               }}
             >
-              <Text style={{ fontFamily: "syne-bold", fontSize: 14 }}>
-                {post.user.firstName} {post.user.lastName}
-              </Text>
               <View
                 style={{
-                  width: 4,
-                  height: 4,
-                  borderRadius: 100,
-                  backgroundColor: theme.colors.blue,
-                  marginHorizontal: 5,
-                }}
-              />
-
-              <Text
-                style={{
-                  fontFamily: "syne-bold",
-                  color: theme.colors.charcoal,
-                  opacity: 0.5,
+                  flexDirection: "row",
+                  alignItems: "center",
                 }}
               >
-                {post.createdAt}
-              </Text>
-            </View>
-            <Text
-              style={{
-                fontFamily: "syne-semibold",
-                fontSize: 25,
-                paddingVertical: 10,
-              }}
-            >
-              {post.title.length > 40
-                ? post.title.slice(0, 40) + "..."
-                : post.title}
-            </Text>
-            <Button
-              style={{
-                borderRadius: 0,
-                backgroundColor: theme.colors.blue,
-                width: 20,
-              }}
-            >
+                <Text style={{ fontFamily: "syne-bold", fontSize: 14 }}>
+                  {post?.user?.firstName} {post?.user?.lastName}
+                </Text>
+                <View
+                  style={{
+                    width: 4,
+                    height: 4,
+                    borderRadius: 100,
+                    backgroundColor: theme.colors.blue,
+                    marginHorizontal: 5,
+                  }}
+                />
+
+                <Text
+                  style={{
+                    fontFamily: "syne-bold",
+                    color: theme.colors.charcoal,
+                    opacity: 0.5,
+                  }}
+                >
+                  {post?.createdAt}
+                </Text>
+              </View>
               <Text
                 style={{
-                  color: theme.colors.offWhite,
+                  fontFamily: "syne-semibold",
+                  fontSize: 25,
+                  paddingVertical: 10,
+                }}
+              >
+                {post?.title?.length > 40
+                  ? post.title.slice(0, 40) + "..."
+                  : post?.title}
+              </Text>
+              <Button
+                style={{
+                  borderRadius: 0,
+                  backgroundColor: theme.colors.blue,
+                  width: 20,
+                }}
+              >
+                <Text
+                  style={{
+                    color: theme.colors.offWhite,
+                    fontFamily: "syne-regular",
+                    fontSize: 14,
+                  }}
+                >
+                  {post?.tags[0]}
+                </Text>
+              </Button>
+              <Text
+                style={{
+                  paddingVertical: 10,
                   fontFamily: "syne-regular",
+                  color: theme.colors.charcoal,
                   fontSize: 14,
                 }}
               >
-                {post.tags[0]}
+                {post?.content}
               </Text>
-            </Button>
-            <Text
-              style={{
-                paddingVertical: 10,
-                fontFamily: "syne-regular",
-                color: theme.colors.charcoal,
-                fontSize: 14,
-              }}
-            >
-              {post.content}
-            </Text>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Feather
-                style={{ color: theme.colors.charcoal }}
-                name="message-square"
-              ></Feather>
-              <Text style={{ marginLeft: 6 }}>{post.comments}</Text>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Feather
+                  style={{ color: theme.colors.charcoal }}
+                  name="message-square"
+                ></Feather>
+                <Text style={{ marginLeft: 6 }}>{post.comments}</Text>
+              </View>
             </View>
+            <View
+              style={{
+                borderBottomWidth: 5,
+                paddingVertical: 6,
+                borderColor: theme.colors.lightGrey,
+              }}
+            />
           </View>
-          <View
-            style={{
-              borderBottomWidth: 5,
-              paddingVertical: 6,
-              borderColor: theme.colors.lightGrey,
-            }}
-          />
-        </View>
-      ))}
+        ))}
     </View>
   );
 };
