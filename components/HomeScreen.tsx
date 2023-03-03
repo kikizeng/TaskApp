@@ -4,13 +4,14 @@ import { Button, Provider as PaperProvider } from "react-native-paper";
 import { theme } from "./DesignSystem";
 import { StatusBar } from "expo-status-bar";
 import LandingSvg from "../assets/LandingSvg";
+import { useNavigation } from "@react-navigation/native";
 
-type HomeScreenProps = {
-  navigation: any;
-};
+// type HomeScreenProps = {
+//   navigation: any;
+// };
 
-const HomeScreen: React.FC<HomeScreenProps> = (props) => {
-  const { navigation } = props;
+const HomeScreen = () => {
+  const navigation = useNavigation();
   return (
     <PaperProvider theme={theme}>
       <View>

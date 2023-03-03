@@ -10,6 +10,11 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+export const smallContainer = StyleSheet.create({
+  container: {
+    paddingHorizontal: 15,
+  },
+});
 
 export const loadFonts = async () => {
   await Font.loadAsync({

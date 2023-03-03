@@ -8,8 +8,10 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import SplashScreen from "./components/SplashScreen";
 import * as Splash from "expo-splash-screen";
 import ForumScreen from "./components/ForumScreen";
+import SinglePostScreen from "./components/SinglePostScreen";
 
 const Stack = createNativeStackNavigator();
+const ForumStack = createNativeStackNavigator();
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -64,11 +66,23 @@ const App = () => {
               component={HomeScreen}
               options={{ headerShown: false }}
             />
-            <Stack.Screen
-              name="ForumScreen"
-              component={ForumScreen}
-              options={{ headerShown: false }}
-            />
+            <Stack.Screen name="ForumScreen" options={{ headerShown: false }}>
+              {() => (
+                <ForumStack.Navigator>
+                  <ForumStack.Screen
+                    name="Forum"
+                    component={ForumScreen}
+                    initialParams={{ posts: posts }}
+                    options={{ headerShown: false }}
+                  />
+                  <ForumStack.Screen
+                    name="SinglePost"
+                    component={SinglePostScreen}
+                    options={{ headerShown: false }}
+                  />
+                </ForumStack.Navigator>
+              )}
+            </Stack.Screen>
           </Stack.Navigator>
         </NavigationContainer>
       )}
