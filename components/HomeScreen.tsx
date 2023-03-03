@@ -6,10 +6,6 @@ import { StatusBar } from "expo-status-bar";
 import LandingSvg from "../assets/LandingSvg";
 import { useNavigation } from "@react-navigation/native";
 
-// type HomeScreenProps = {
-//   navigation: any;
-// };
-
 const HomeScreen = () => {
   const navigation = useNavigation();
   return (

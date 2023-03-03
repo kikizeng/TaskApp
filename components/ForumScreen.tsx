@@ -109,7 +109,7 @@ const ForumScreen: React.FC = () => {
       <View
         style={{ borderBottomWidth: 5, borderColor: theme.colors.lightGrey }}
       />
-      <PostView postData={dummyData} touchable={true} />
+      <PostView postData={dummyData} touchable={true} hideTitle={true} />
     </ScrollView>
   );
 };

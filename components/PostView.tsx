@@ -9,11 +9,12 @@ import { DummyDataProps } from "../type";
 type PostViewProps = {
   postData: DummyDataProps[];
   touchable?: boolean;
+  hideTitle?: boolean;
 };
 
 const PostView: React.FC<PostViewProps> = (prop) => {
   const navigation = useNavigation();
-  const { postData, touchable } = prop;
+  const { postData, touchable, hideTitle } = prop;
   return (
     <View>
       {postData &&
@@ -73,7 +74,7 @@ const PostView: React.FC<PostViewProps> = (prop) => {
                     paddingVertical: 10,
                   }}
                 >
-                  {post?.title?.length > 40
+                  {hideTitle && post?.title?.length > 40
                     ? post.title.slice(0, 40) + "..."
                     : post?.title}
                 </Text>

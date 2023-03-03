@@ -56,7 +56,7 @@ const SinglePostScreen: React.FC<Props | any> = ({ route }) => {
           }}
         ></Text>
       </View>
-      <PostView touchable={false} postData={singlePostData} />
+      <PostView touchable={false} postData={singlePostData} hideTitle={false} />
       <View style={smallContainer.container}>
         <Text
           style={{
