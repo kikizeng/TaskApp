@@ -1,10 +1,10 @@
 import React from "react";
 import { View, TouchableOpacity, Text } from "react-native";
-import { DummyDataProps } from "../dummyData";
 import { theme } from "./DesignSystem";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "react-native-paper";
+import { DummyDataProps } from "../type";
 
 type PostViewProps = {
   postData: DummyDataProps[];
@@ -17,7 +17,7 @@ const PostView: React.FC<PostViewProps> = (prop) => {
   return (
     <View>
       {postData &&
-        postData.map((post, i) => (
+        postData.map((post: DummyDataProps, i: number) => (
           <TouchableOpacity
             key={`post-${i}`}
             onPress={() =>
@@ -77,23 +77,28 @@ const PostView: React.FC<PostViewProps> = (prop) => {
                     ? post.title.slice(0, 40) + "..."
                     : post?.title}
                 </Text>
-                <Button
-                  style={{
-                    borderRadius: 0,
-                    backgroundColor: theme.colors.blue,
-                    width: 20,
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: theme.colors.offWhite,
-                      fontFamily: "syne-regular",
-                      fontSize: 14,
-                    }}
-                  >
-                    {post?.tags[0]}
-                  </Text>
-                </Button>
+                <View style={{ flexDirection: "row" }}>
+                  {post?.tags.map((tag: string) => (
+                    <Button
+                      style={{
+                        marginRight: 10,
+                        borderRadius: 0,
+                        backgroundColor: theme.colors.blue,
+                      }}
+                    >
+                      <Text
+                        style={{
+                          flex: 1,
+                          color: theme.colors.offWhite,
+                          fontFamily: "syne-regular",
+                          fontSize: 14,
+                        }}
+                      >
+                        {tag}
+                      </Text>
+                    </Button>
+                  ))}
+                </View>
                 <Text
                   style={{
                     paddingVertical: 10,
@@ -109,7 +114,7 @@ const PostView: React.FC<PostViewProps> = (prop) => {
                     style={{ color: theme.colors.charcoal }}
                     name="message-square"
                   ></Feather>
-                  <Text style={{ marginLeft: 6 }}>{post.comments}</Text>
+                  <Text style={{ marginLeft: 6 }}>{post?.comments.length}</Text>
                 </View>
               </View>
             </View>

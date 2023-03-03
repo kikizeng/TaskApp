@@ -18,6 +18,7 @@ export const smallContainer = StyleSheet.create({
 
 export const loadFonts = async () => {
   await Font.loadAsync({
+    "syne-extra-bold": require("../assets/fonts/Syne-ExtraBold.ttf"),
     "syne-bold": require("../assets/fonts/Syne-Bold.ttf"),
     "syne-semibold": require("../assets/fonts/Syne-SemiBold.ttf"),
     "syne-regular": require("../assets/fonts/Syne-Regular.ttf"),
@@ -38,6 +39,9 @@ export const theme = {
     bold: {
       fontFamily: "syne-bold",
       fontWeight: "bold",
+    },
+    extrabold: {
+      fontFamily: "syne-extra-bold",
     },
   },
   colors: {

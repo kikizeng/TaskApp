@@ -1,23 +1,26 @@
-import React from "react";
-import {
-  Text,
-  View,
-  TextInput,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import React, { useState } from "react";
+import { Text, View, TextInput, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
 import { theme } from "./DesignSystem";
-import { MaterialIcons, Feather } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { Button } from "react-native-paper";
-import { dummyData } from "../dummyData";
+import { dummyData, TAGS } from "../dummyData";
 import PostView from "./PostView";
 
 const Stack = createStackNavigator();
 const ForumScreen: React.FC = () => {
   const navigation = useNavigation();
+  // const [active, setActive] = useState(false);
+  const [active, setActive] = useState<boolean[]>(
+    Array(TAGS.length).fill(false)
+  );
+  const handleTagPress = (index: number) => {
+    const newActive = [...active];
+    newActive[index] = !newActive[index];
+    setActive(newActive);
+  };
   return (
     <ScrollView style={{ flexBasis: 1 }}>
       <View
@@ -75,39 +78,32 @@ const ForumScreen: React.FC = () => {
             paddingBottom: 17,
           }}
         >
-          <Button
-            style={{
-              borderRadius: 0,
-              backgroundColor: theme.colors.blue,
-              marginRight: 10,
-            }}
-          >
-            <Text
+          {TAGS?.map((tag: string, i: number) => (
+            <Button
+              onPress={() => handleTagPress(i)}
+              key={`tag-${i}`}
               style={{
-                color: theme.colors.offWhite,
-                fontFamily: "syne-regular",
-                fontSize: 14,
+                borderRadius: 0,
+                backgroundColor: active[i]
+                  ? theme.colors.blue
+                  : theme.colors.lightGrey,
+                marginRight: 10,
               }}
             >
-              Tag 1
-            </Text>
-          </Button>
-          <Button
-            style={{
-              borderRadius: 0,
-              backgroundColor: theme.colors.lightGrey,
-            }}
-          >
-            <Text
-              style={{
-                color: theme.colors.charcoal,
-                fontFamily: "syne-regular",
-                fontSize: 14,
-              }}
-            >
-              Tag 2
-            </Text>
-          </Button>
+              <Text
+                style={{
+                  textAlign: "center",
+                  color: active[i]
+                    ? theme.colors.offWhite
+                    : theme.colors.charcoal,
+                  fontFamily: "syne-regular",
+                  fontSize: 14,
+                }}
+              >
+                {tag}
+              </Text>
+            </Button>
+          ))}
         </View>
       </View>
       <View
